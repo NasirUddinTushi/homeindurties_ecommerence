@@ -1,16 +1,15 @@
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import sys
+import os
+from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(os.path.join(BASE_DIR, "apps"))  # Move here
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = 'django-insecure-!(4fw5f7_y*scp#t8q!#9cy(oc=nu&tkc95bwjkgxll4#ctymc'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -34,6 +33,8 @@ INSTALLED_APPS = [
     'apps.account',
     'apps.products',
     'apps.cms',
+    'apps.shop',
+    'apps.reviews',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,13 @@ REST_FRAMEWORK = {
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),     
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
